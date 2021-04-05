@@ -90,7 +90,7 @@ namespace Microblink.Common.MrzValidator
         }
 
         /// <summary>
-        /// Validates if MRZ TD1 string is in right format
+        /// Validates if MRZ TD1 string is in right format 
         /// </summary>
         /// <returns></returns>
         public override bool IsValidMrzString(string mrzString)
