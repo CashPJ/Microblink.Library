@@ -1,18 +1,16 @@
-﻿using Microblink.Library.Services.Models.Interfaces;
+﻿
+using Microblink.Library.Services.Models.Dto.Interfaces;
 using System;
-using System.Collections.Generic;
 
-#nullable disable
-
-namespace Microblink.Library.Services.Models
+namespace Microblink.Library.Api.Models
 {
-    public partial class  User : IEntity
+    /// <inheritdoc/>
+    public class User : IUser
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public DateTime? DateOfBirth { get; set; }
-        public virtual ICollection<Contact> Contacts { get; set; }
-        public virtual ICollection<Rent> Rents { get; set; }
+        public DateTime DateOfBirth { get; set; }
+        public bool? IsValidMrz { get; set; }
     }
 }

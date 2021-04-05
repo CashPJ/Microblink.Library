@@ -1,20 +1,18 @@
-﻿using Microblink.Library.Services.Models.Interfaces;
+﻿
+using Microblink.Library.Services.Models.Dto.Interfaces;
 using System;
-using System.Collections.Generic;
 
-#nullable disable
-
-namespace Microblink.Library.Services.Models
+namespace Microblink.Library.Api.Models
 {
-    public partial class Rent : IEntity
+    /// <inheritdoc/>
+    public class Rent : IRent
     {
         public int Id { get; set; }
         public int UserId { get; set; }
         public int BookId { get; set; }
+        public int BookTitleId { get; set; }
         public DateTime RentDate { get; set; }
         public DateTime DueDate { get; set; }
-        public DateTime ReturnDate { get; set; }
-        public virtual Book Book { get; set; }
-        public virtual User User { get; set; }
+        public DateTime? ReturnDate { get; set; }
     }
 }

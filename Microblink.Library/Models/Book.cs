@@ -1,16 +1,12 @@
-﻿using Microblink.Library.Services.Models.Interfaces;
-using System;
-using System.Collections.Generic;
+﻿using Microblink.Library.Services.Models.Dto.Interfaces;
 
-#nullable disable
-
-namespace Microblink.Library.Models
+namespace Microblink.Library.Api.Models
 {
-    public partial class Book : IEntity
+    /// <inheritdoc/>
+    public class Book : IBook
     {
         public int Id { get; set; }
-        public int IdBookTitle { get; set; }
-
-        public virtual BookTitle BookTitle { get; set; }
+        public int BookTitleId { get; set; }
+        public string Code { get; set; }
     }
 }

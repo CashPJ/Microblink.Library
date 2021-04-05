@@ -1,20 +1,15 @@
-﻿using Microblink.Library.Services.Models.Interfaces;
-using System;
-using System.Collections.Generic;
+﻿
 
-#nullable disable
+using Microblink.Library.Services.Models.Dto.Interfaces;
 
-namespace Microblink.Library.Models
+namespace Microblink.Library.Api.Models
 {
-    public partial class Contact : IEntity
+    ///<inheritdoc/>
+    public class Contact : IContact
     {
         public int Id { get; set; }
         public int UserId { get; set; }
         public int ContactTypeId { get; set; }
         public string Value { get; set; }
-
-        public virtual ContactType ContactType { get; set; }
-        
-        public virtual User User { get; set; }
     }
 }

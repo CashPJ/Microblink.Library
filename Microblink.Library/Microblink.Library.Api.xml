@@ -1,0 +1,175 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microblink.Library.Api</name>
+    </assembly>
+    <members>
+        <member name="T:Microblink.Library.Controllers.BooksController">
+            <summary>
+            Books, books, books... And some more books...
+            </summary>
+        </member>
+        <member name="M:Microblink.Library.Controllers.BooksController.#ctor(Microsoft.Extensions.Logging.ILogger{Microblink.Library.Controllers.BooksController},Microblink.Library.Services.Context.Interfaces.IDataContext)">
+            <summary>
+            Books, books, books... And some more books...
+            </summary>
+        </member>
+        <member name="M:Microblink.Library.Controllers.BooksController.Titles">
+            <summary>
+            Returns all book titles
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Microblink.Library.Controllers.BooksController.Rent(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Rents book title
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Microblink.Library.Controllers.BooksController.Return(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Returns rented book
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Microblink.Library.Controllers.CodebooksController">
+            <summary>
+            Codebooks
+            </summary>
+        </member>
+        <member name="M:Microblink.Library.Controllers.CodebooksController.ContactTypes">
+            <summary>
+            Contact types
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Microblink.Library.Controllers.ReportsController">
+            <summary>
+            Reports
+            </summary>
+        </member>
+        <member name="M:Microblink.Library.Controllers.ReportsController.#ctor(Microsoft.Extensions.Logging.ILogger{Microblink.Library.Controllers.ReportsController},Microblink.Library.Services.Context.Interfaces.IDataContext)">
+            <summary>
+            Reports
+            </summary>
+        </member>
+        <member name="M:Microblink.Library.Controllers.ReportsController.RentHistory">
+            <summary>
+            Rent history report
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Microblink.Library.Controllers.ReportsController.TopOverdueUsers">
+            <summary>
+            Top overdue users
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Microblink.Library.Controllers.UsersController.Get">
+            <summary>
+            Returns all users
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Microblink.Library.Controllers.UsersController.Get(System.Int32)">
+            <summary>
+            Returns specific users
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microblink.Library.Controllers.UsersController.Create(System.String,System.String,System.DateTime)">
+            <summary>
+            Creates user
+            </summary>
+            <param name="firstName"></param>
+            <param name="lastName"></param>
+            <param name="dateOfBirth"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microblink.Library.Controllers.UsersController.CreateUserByIdCard(Microblink.Library.Api.Models.Request.CreateUserByIdCardRequestModel)">
+            <summary>
+            Creates user by OCRing ID card
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microblink.Library.Controllers.UsersController.Update(System.Int32,System.String,System.String,System.DateTime)">
+            <summary>
+            Updates specific user
+            </summary>
+            <param name="userId"></param>
+            <param name="firstName"></param>
+            <param name="lastName"></param>
+            <param name="dateOfBirth"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microblink.Library.Controllers.UsersController.Delete(System.Int32)">
+            <summary>
+            Deletes specific user
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microblink.Library.Controllers.UsersController.Contacts(System.Int32)">
+            <summary>
+            Gets contacts for specific user
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microblink.Library.Controllers.UsersController.CreateContact(System.Int32,System.Int32,System.String)">
+            <summary>
+            Creates users contact
+            </summary>
+            <param name="userId"></param>
+            <param name="contactTypeId"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microblink.Library.Controllers.UsersController.DeleteContact(System.Int32,System.Int32)">
+            <summary>
+            Deletes users contact
+            </summary>
+            <param name="contactId"></param>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Microblink.Library.Api.Models.Book">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microblink.Library.Api.Models.BookTitle">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="T:Microblink.Library.Api.Models.Contact">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microblink.Library.Api.Models.ContactType">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microblink.Library.Api.Models.Rent">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microblink.Library.Api.Models.ReportRentHistory">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microblink.Library.Api.Models.ReportTopOverdue">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microblink.Library.Api.Models.Request.CreateUserByIdCardRequestModel">
+            <summary>
+            CreateByIdCard request model
+            </summary>
+        </member>
+        <member name="P:Microblink.Library.Api.Models.Request.CreateUserByIdCardRequestModel.IdCardBase64Image">
+            <summary>
+            Base 64 encoded ID card image
+            </summary>
+        </member>
+        <member name="T:Microblink.Library.Api.Models.User">
+            <inheritdoc/>
+        </member>
+    </members>
+</doc>
