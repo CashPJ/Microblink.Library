@@ -27,13 +27,13 @@ namespace Microblink.Library.Services.Context
         }
 
         /// <inheritdoc/>
-        public async Task<IContact> CreateContact(int userId, int contactTypeId, string value)
+        public async Task<IModelContainer<IContact>> CreateContact(int userId, int contactTypeId, string value)
         {
             return await _databaseContext.CreateContact(userId, contactTypeId, value);
         }
 
         /// <inheritdoc/>
-        public async Task<IUser> CreateUser(string firstName, string lastName, DateTime dateOfBirt, bool? isValidMrz = null)
+        public async Task<IModelContainer<IUser>> CreateUser(string firstName, string lastName, DateTime dateOfBirt, bool? isValidMrz = null)
         {
             return await _databaseContext.CreateUser(firstName, lastName, dateOfBirt, isValidMrz);
         }
@@ -51,31 +51,31 @@ namespace Microblink.Library.Services.Context
         }
 
         /// <inheritdoc/>
-        public async Task<IBook> GetAvailableBook(int bookTitleId)
+        public async Task<IModelContainer<IBook>> GetAvailableBook(int bookTitleId)
         {
             return await _databaseContext.GetAvailableBook(bookTitleId);
         }
 
         /// <inheritdoc/>
-        public async Task<IBook> GetBook(int bookid)
+        public async Task<IModelContainer<IBook>> GetBook(int bookid)
         {
             return await _databaseContext.GetBook(bookid);
         }
 
         /// <inheritdoc/>
-        public async Task<IEnumerable<IBook>> GetBooks()
+        public async Task<IModelContainer<IEnumerable<IBook>>> GetBooks()
         {
             return await _databaseContext.SearchBooks();
         }
 
         /// <inheritdoc/>
-        public async Task<IBookTitle> GetBookTitle(int bookTitleid)
+        public async Task<IModelContainer<IBookTitle>> GetBookTitle(int bookTitleid)
         {
             return await _databaseContext.GetBookTitle(bookTitleid);
         }
 
         /// <inheritdoc/>
-        public async Task<IEnumerable<IBookTitle>> GetBookTitles()
+        public async Task<IModelContainer<IEnumerable<IBookTitle>>> GetBookTitles()
         {
             return await _databaseContext.SearchBookTitles();
         }
@@ -87,13 +87,13 @@ namespace Microblink.Library.Services.Context
         }
 
         /// <inheritdoc/>
-        public async Task<IEnumerable<IContactType>> GetContactTypes()
+        public async Task<IModelContainer<IEnumerable<IContactType>>> GetContactTypes()
         {
             return await _databaseContext.GetContactTypes();
         }
 
         /// <inheritdoc/>
-        public async Task<IRent> GetRent(int rentId)
+        public async Task<IModelContainer<IRent>> GetRent(int rentId)
         {
             return await _databaseContext.GetRent(rentId);
         }
@@ -105,7 +105,7 @@ namespace Microblink.Library.Services.Context
         }
 
         /// <inheritdoc/>
-        public async Task<IEnumerable<IUser>> GetUsers()
+        public async Task<IModelContainer<IEnumerable<IUser>>> GetUsers()
         {
             return await _databaseContext.GetUsers();
         }
@@ -129,25 +129,25 @@ namespace Microblink.Library.Services.Context
         }
 
         /// <inheritdoc/>
-        public async Task<IEnumerable<IBook>> SearchBooks(Hashtable filter = null)
+        public async Task<IModelContainer<IEnumerable<IBook>>> SearchBooks(Hashtable filter = null)
         {
             return await _databaseContext.SearchBooks(filter);
         }
 
         /// <inheritdoc/>
-        public async Task<IEnumerable<IBookTitle>> SearchBookTitles(Hashtable filter = null)
+        public async Task<IModelContainer<IEnumerable<IBookTitle>>> SearchBookTitles(Hashtable filter = null)
         {
             return await _databaseContext.SearchBookTitles(filter);
         }
 
         /// <inheritdoc/>
-        public async Task<IEnumerable<IContact>> SearchContacts(Hashtable filter = null)
+        public async Task<IModelContainer<IEnumerable<IContact>>> SearchContacts(Hashtable filter = null)
         {
             return await _databaseContext.SearchContacts(filter);
         }
 
         /// <inheritdoc/>
-        public async Task<IEnumerable<IUser>> SearchUsers(Hashtable filter = null)
+        public async Task<IModelContainer<IEnumerable<IUser>>> SearchUsers(Hashtable filter = null)
         {
             return await _databaseContext.SearchUsers(filter);
         }
@@ -159,13 +159,13 @@ namespace Microblink.Library.Services.Context
         }
 
         /// <inheritdoc/>
-        public async Task<IEnumerable<IReportRentHistory>> GetRentHistoryReport(int limit)
+        public async Task<IModelContainer<IEnumerable<IReportRentHistory>>> GetRentHistoryReport(int limit)
         {
             return await _databaseContext.GetRentHistoryReport(limit);
         }
 
         /// <inheritdoc/>
-        public async Task<IEnumerable<IReportTopOverdue>> GetTopOverdueReport(int limit)
+        public async Task<IModelContainer<IEnumerable<IReportTopOverdue>>> GetTopOverdueReport(int limit)
         {
             return await _databaseContext.GetTopOverdueReport(limit);
         }

@@ -22,7 +22,7 @@
         </member>
         <member name="M:Microblink.Library.Controllers.BooksController.Rent(System.Int32,System.Int32,System.Int32)">
             <summary>
-            Rents book title
+            Creates new rent of the book title and returns newly created <see cref="T:Microblink.Library.Api.Models.Rent"/> entity.
             </summary>
             <returns></returns>
         </member>
@@ -133,6 +133,34 @@
             </summary>
             <param name="contactId"></param>
             <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microblink.Library.Api.Core.ApiControllerBase.ApiActionResult``2(Microblink.Library.Services.Models.Interfaces.IModelContainer{``0})">
+            <summary>
+            Mapping generic interface I to generic destination type D and returns <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/> acording <see cref="P:Microblink.Library.Services.Models.ModelContainer`1.ResponseStatusCode"/>
+            </summary>
+            <typeparam name="I"></typeparam>
+            <typeparam name="D"></typeparam>
+            <param name="modelContainer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microblink.Library.Api.Core.ApiControllerBase.ApiActionResult``2(Microblink.Library.Services.Models.Interfaces.IModelContainer{System.Collections.Generic.IEnumerable{``0}})">
+            <summary>
+            Mapps generic interface IEnumerable&lt;I&gt; to generic destination type List&lt;D&gt; and returns appropriate <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/> acording <see cref="P:Microblink.Library.Services.Models.ModelContainer`1.ResponseStatusCode"/>
+            </summary>
+            <typeparam name="SourceInterface"></typeparam>
+            <typeparam name="DestinationType"></typeparam>
+            <param name="modelContainer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microblink.Library.Api.Core.ApiControllerBase.ApiActionResult``1(``0,Microblink.Library.Services.Models.ResponseStatusCode,Microblink.Library.Services.Models.ModelContainerErrorMessages)">
+            <summary>
+            Returns generic response model T <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/> acording <see cref="P:Microblink.Library.Services.Models.ModelContainer`1.ResponseStatusCode"/>
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="mappedResponseModel"></param>
+            <param name="responseStatusCode"></param>
+            <param name="errorMessage"></param>
             <returns></returns>
         </member>
         <member name="T:Microblink.Library.Api.Models.Book">

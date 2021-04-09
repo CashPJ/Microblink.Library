@@ -32,7 +32,7 @@ namespace Mapper
         public static List<D> Map<S, D>(this IEnumerable<S> source)
         {
             if (source == null)
-                throw new ArgumentNullException(nameof(S) + " is null");
+                return default;
 
             return source.Select(Map<S, D>).ToList();
         }
@@ -49,6 +49,9 @@ namespace Mapper
         /// <returns></returns>
         public static D Map<S, D>(this S source)
         {
+            if (source == null)
+                return default;
+
             D destinationInstance = Activator.CreateInstance<D>();
 
             IEnumerable<PropertyInfo> sourceParameterList =

@@ -62,12 +62,12 @@ namespace Microblink.Library.Services.Services.Context
                                     IsValidMrz = isValidMrz
                                 };
 
-                                return new ModelContainer<IUser>(user);
+                                return new ModelContainer<IUser>(user, ActionType.Read, ResponseStatusCode.Ok);
                             }
 
                             //some OCR data is missing
                             _logger.LogWarning("Some data is missing during BlinkID OCR");
-                            return new ModelContainer<IUser>
+                            return new ModelContainer<IUser>(ActionType.Read, ResponseStatusCode.UnprocessableEntity)
                             {
                                 ErrorMessage = ModelContainerErrorMessages.Missing_One_Or_More_Obligatory_Fields
                             };
@@ -75,7 +75,7 @@ namespace Microblink.Library.Services.Services.Context
 
                         //response was not successfull
                         _logger.LogWarning($"OcrData BlinkId response returned: {(int)response.StatusCode} {response.StatusCode}");
-                        return new ModelContainer<IUser>
+                        return new ModelContainer<IUser>(ActionType.Read, ResponseStatusCode.UnprocessableEntity)
                         {
                             ErrorMessage = ModelContainerErrorMessages.Unprocessable_Entity
                         };

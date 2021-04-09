@@ -1,4 +1,5 @@
 ﻿using Mapper;
+using Microblink.Library.Api.Core;
 using Microblink.Library.Api.Models;
 using Microblink.Library.Services.Context.Interfaces;
 using Microblink.Library.Services.Models.Dto.Interfaces;
@@ -14,7 +15,7 @@ namespace Microblink.Library.Controllers
     /// </summary>
     [ApiController]
     [Route("[controller]")]
-    public class BooksController : ControllerBase
+    public class BooksController : ApiControllerBase
     {
         private readonly ILogger<BooksController> _logger;
         private readonly IDataContext _dataContext;
@@ -35,13 +36,13 @@ namespace Microblink.Library.Controllers
         [HttpGet]
         [Route("")]
         public async Task<ActionResult<List<BookTitle>>> Titles()
-        {
+        {            
             var result = await _dataContext.GetBookTitles();
-            return Ok(result.Map<IBookTitle, BookTitle>());
+            return ApiActionResult<IBookTitle, BookTitle>(result);
         }
 
         /// <summary>
-        /// Rents book title
+        /// Creates new rent of the book title and returns newly created <see cref="Api.Models.Rent"/> entity.
         /// </summary>
         /// <returns></returns>
         [HttpPost]
@@ -49,14 +50,7 @@ namespace Microblink.Library.Controllers
         public async Task<ActionResult<List<Rent>>> Rent(int bookTitleId, int userId, int durationInDays)
         {
             var result = await _dataContext.RentBookTitle(bookTitleId, userId, durationInDays);
-            if (result.IsSuccessful)
-            {
-                return Ok(result.Model.Map<IRent, Rent>());
-            }
-            else
-            {
-                return NotFound(result.ErrorMessage.ToString());
-            }
+            return ApiActionResult<IRent, Rent>(result);
         }
 
         /// <summary>
@@ -68,18 +62,7 @@ namespace Microblink.Library.Controllers
         public async Task<ActionResult<Rent>> Return(int rentId, int bookId, int userId)
         {
             var result = await _dataContext.ReturnRentedBookTitle(rentId, bookId, userId);
-            if (result.IsSuccessful)
-            {
-                return Ok(result.Model.Map<IRent, Rent>());
-            }
-            else
-            {
-                return NotFound(result.ErrorMessage.ToString());
-            }
+            return ApiActionResult<IRent, Rent>(result);            
         }
-
-
-
-
     }
 }

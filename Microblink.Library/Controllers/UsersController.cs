@@ -1,12 +1,16 @@
 ﻿using Mapper;
+using Microblink.Library.Api.Core;
 using Microblink.Library.Api.Models;
 using Microblink.Library.Api.Models.Request;
 using Microblink.Library.Services.Context.Interfaces;
 using Microblink.Library.Services.Models.Dto.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Microblink.Library.Controllers
@@ -14,7 +18,7 @@ namespace Microblink.Library.Controllers
 
     [ApiController]
     [Route("[controller]")]
-    public class UsersController : ControllerBase
+    public class UsersController : ApiControllerBase
     {
         private readonly ILogger<UsersController> _logger;
         private readonly IDataContext _dataContext;
@@ -34,7 +38,7 @@ namespace Microblink.Library.Controllers
         public async Task<ActionResult<List<User>>> Get()
         {
             var result = await _dataContext.GetUsers();
-            return Ok(result.Map<IUser, User>());
+            return ApiActionResult<IUser,User>(result);
         }
 
         /// <summary>
@@ -47,15 +51,7 @@ namespace Microblink.Library.Controllers
         public async Task<ActionResult<User>> Get(int userId)
         {
             var result = await _dataContext.GetUser(userId);
-
-            if (result.IsSuccessful)
-            {
-                return Ok(result.Model.Map<IUser, User>());
-            }
-            else
-            {
-                return NotFound(result.ErrorMessage.ToString());
-            }
+            return ApiActionResult<IUser, User>(result);
         }
 
         /// <summary>
@@ -70,7 +66,7 @@ namespace Microblink.Library.Controllers
         public async Task<ActionResult<User>> Create(string firstName, string lastName, DateTime dateOfBirth)
         {
             var result = await _dataContext.CreateUser(firstName, lastName, dateOfBirth, null);
-            return Ok(result.Map<IUser, User>());            
+            return ApiActionResult<IUser, User>(result);            
         }
 
         /// <summary>
@@ -80,7 +76,7 @@ namespace Microblink.Library.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("User/CreateByIdCard")]
-        public async Task<ActionResult<User>> CreateUserByIdCard(CreateUserByIdCardRequestModel model)
+        public async Task<ActionResult> CreateUserByIdCard(CreateUserByIdCardRequestModel model)
         {
             if (ModelState.IsValid)
             {
@@ -89,7 +85,7 @@ namespace Microblink.Library.Controllers
                 if (ocrResult.IsSuccessful)
                 {
                     var result = await _dataContext.CreateUser(ocrResult.Model.FirstName, ocrResult.Model.LastName, ocrResult.Model.DateOfBirth, ocrResult.Model.IsValidMrz);
-                    return Ok(result.Map<IUser, User>());
+                    return ApiActionResult<IUser, User>(result);
                 }
                 else
                 {
@@ -98,7 +94,7 @@ namespace Microblink.Library.Controllers
             }
             else
             {
-                return BadRequest();
+                return BadRequest(JsonConvert.SerializeObject(ModelState.Values.Select(e => e.Errors).ToList()));
             }
         }
 
@@ -115,15 +111,7 @@ namespace Microblink.Library.Controllers
         public async Task<ActionResult<User>> Update(int userId, string firstName, string lastName, DateTime dateOfBirth)
         {
             var result = await _dataContext.UpdateUser(userId, firstName, lastName, dateOfBirth);
-
-            if (result.IsSuccessful)
-            {
-                return Ok(result.Model.Map<IUser, User>());
-            }
-            else
-            {
-                return NotFound(result.ErrorMessage.ToString());
-            }
+            return ApiActionResult<IUser, User>(result);
         }
 
         /// <summary>
@@ -136,15 +124,7 @@ namespace Microblink.Library.Controllers
         public async Task<ActionResult> Delete(int userId)
         {
             var result = await _dataContext.DeleteUser(userId);
-
-            if (result.IsSuccessful)
-            {
-                return Ok();
-            }
-            else
-            {
-                return NotFound(result.ErrorMessage.ToString());
-            }
+            return ApiActionResult<IUser, User>(result);
         }
 
         /// <summary>
@@ -157,14 +137,7 @@ namespace Microblink.Library.Controllers
         public async Task<ActionResult<List<Contact>>> Contacts(int userId)
         {
             var result = await _dataContext.GetUserContacts(userId);
-            if (result.IsSuccessful)
-            {
-                return Ok(result.Model.Map<IContact, Contact>());
-            }
-            else
-            {
-                return NotFound(result.ErrorMessage.ToString());
-            }
+            return ApiActionResult<IContact, Contact>(result);
         }
 
         /// <summary>
@@ -179,7 +152,7 @@ namespace Microblink.Library.Controllers
         public async Task<ActionResult<List<Contact>>> CreateContact(int userId, int contactTypeId, string value)
         {
             var result = await _dataContext.CreateContact(userId, contactTypeId, value);
-            return Ok(result.Map<IContact, Contact>());
+            return ApiActionResult<IContact, Contact>(result);
         }
 
         /// <summary>
@@ -193,14 +166,7 @@ namespace Microblink.Library.Controllers
         public async Task<ActionResult> DeleteContact(int contactId, int userId)
         {
             var result = await _dataContext.DeleteContact(contactId, userId);
-            if (result.IsSuccessful)
-            {
-                return Ok();
-            }
-            else
-            {
-                return NotFound(result.ErrorMessage.ToString());
-            }            
+            return ApiActionResult<IContact, Contact>(result);
         }
     }
     
